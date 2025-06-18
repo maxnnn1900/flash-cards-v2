@@ -6,7 +6,6 @@
     <title>Флеш-карты для обучения</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         /* Минимальные пользовательские стили */
         body {
@@ -20,22 +19,22 @@
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800 text-sm md:text-base">
-    <div id="app" class="container mx-auto p-2 md:p-4">
-        <h1 class="text-2xl md:text-4xl font-extrabold text-center my-4 md:my-8 text-gray-900">Флеш-карты для обучения</h1>
+    <div id="app" class="container mx-auto p-1 md:p-4">
+        <h1 class="text-2xl md:text-4xl font-extrabold text-center my-2 md:my-8 text-gray-900">Флеш-карты для обучения</h1>
 
-        <div class="mb-4 md:mb-8">
-            <nav class="flex justify-center space-x-1 md:space-x-4 mb-2 md:mb-4">
+        <div class="mb-2 md:mb-8">
+            <nav class="flex justify-center space-x-1 md:space-x-4 mb-1 md:mb-4">
                 <button @click="currentView = 'load'" :class="{'bg-green-500 text-white': currentView === 'load', 'bg-blue-500 text-white': currentView !== 'load'}" class="px-2 py-1 rounded-md text-sm font-semibold hover:opacity-90 transition-opacity duration-200">Загрузка колоды</button>
                 <button @click="currentView = 'learn'" :class="{'bg-green-500 text-white': currentView === 'learn', 'bg-blue-500 text-white': currentView !== 'learn'}" class="px-2 py-1 rounded-md text-sm font-semibold hover:opacity-90 transition-opacity duration-200">Изучение</button>
                 <button @click="currentView = 'manage'" :class="{'bg-green-500 text-white': currentView === 'manage', 'bg-blue-500 text-white': currentView !== 'manage'}" class="px-2 py-1 rounded-md text-sm font-semibold hover:opacity-90 transition-opacity duration-200">Управление колодами</button>
             </nav>
         </div>
 
-        <div v-if="currentView === 'load'" class="bg-white p-2 md:p-6 rounded-lg shadow-md">
-            <h2 class="text-xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-800">Загрузка новой колоды</h2>
+        <div v-if="currentView === 'load'" class="bg-white p-1 md:p-6 rounded-lg shadow-md">
+            <h2 class="text-xl md:text-3xl font-bold mb-2 md:mb-6 text-gray-800">Загрузка новой колоды</h2>
             <textarea
                 v-model="newDeckInput"
-                class="w-full p-2 md:p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm md:text-lg"
+                class="w-full p-1 md:p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm md:text-lg"
                 rows="10"
                 placeholder="Введите карточки в формате:
 Q.
@@ -54,51 +53,51 @@ console.log('Hello, world!');
             <p class="text-sm text-gray-600 mt-2">
                 Используйте `Q.` для вопроса, `A.` для ответа. Разделяйте карточки `---`. Для блоков кода используйте тройные бэктики (\`\`\`).
             </p>
-            <button @click="loadDeck" class="mt-4 md:mt-6 w-full bg-green-600 text-white px-2 py-1 rounded-md text-sm font-semibold hover:bg-green-700 transition-colors duration-200">Загрузить колоду</button>
-            <p v-if="loadMessage" :class="{'text-green-600': loadMessageType === 'success', 'text-red-600': loadMessageType === 'error'}" class="mt-4 text-center text-base md:text-lg">{{ loadMessage }}</p>
+            <button @click="loadDeck" class="mt-2 md:mt-6 w-full bg-green-600 text-white px-2 py-1 rounded-md text-sm font-semibold hover:bg-green-700 transition-colors duration-200">Загрузить колоду</button>
+            <p v-if="loadMessage" :class="{'text-green-600': loadMessageType === 'success', 'text-red-600': loadMessageType === 'error'}" class="mt-2 text-center text-base md:text-lg">{{ loadMessage }}</p>
         </div>
 
-        <div v-if="currentView === 'learn'" class="bg-white p-2 md:p-8 rounded-lg shadow-md">
-            <h2 class="text-xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-800">Изучение колоды: {{ currentDeck ? currentDeck.name : 'Нет активной колоды' }}</h2>
+        <div v-if="currentView === 'learn'" class="bg-white p-1 md:p-8 rounded-lg shadow-md">
+            <h2 class="text-xl md:text-3xl font-bold mb-2 md:mb-6 text-gray-800">Изучение колоды: {{ currentDeck ? currentDeck.name : 'Нет активной колоды' }}</h2>
 
             <div v-if="currentDeck && currentDeck.cards.length > 0">
-                <div v-if="currentCard" class="bg-gray-50 p-3 md:p-6 rounded-lg shadow-inner mb-4 md:mb-6 relative">
+                <div v-if="currentCard" class="bg-gray-50 p-2 md:p-6 rounded-lg shadow-inner mb-2 md:mb-6 relative">
                     <button @click="deleteCurrentCard" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl transition-colors duration-200" title="Удалить карточку">
-                        <i class="fas fa-trash-alt"></i>
+                        🗑️
                     </button>
-                    <p class="text-lg md:text-2xl font-semibold mb-2 md:mb-4 text-gray-900">Q: {{ currentCard.question }}</p>
+                    <p class="text-lg md:text-2xl font-semibold mb-1 md:mb-4 text-gray-900">Q: {{ currentCard.question }}</p>
                     <div v-if="showAnswer" class="mt-4 border-t border-gray-200 pt-4">
                         <p class="text-base md:text-xl font-semibold mb-1 md:mb-2 text-gray-800">A:</p>
                         <div v-html="highlightedAnswer" class="prose max-w-none mb-4"></div>
                         <p class="text-sm text-gray-600">Вес карточки: {{ currentCard.weight.toFixed(2) }} | Показов: {{ currentCard.attempts }}</p>
                     </div>
                 </div>
-                <div v-else class="text-center text-gray-600 text-base md:text-xl py-4 md:py-10">
+                <div v-else class="text-center text-gray-600 text-base md:text-xl py-2 md:py-10">
                     Все карточки в этой колоде изучены или удалены. Выберите другую или загрузите новую.
                 </div>
 
                 <div v-if="currentCard">
-                    <div v-if="!cardRated" class="flex justify-around mt-4 md:mt-6 space-x-2 md:space-x-4">
+                    <div v-if="!cardRated" class="flex justify-around mt-2 md:mt-6 space-x-2 md:space-x-4">
                         <button @click="rateCard('forgot')" class="flex-1 bg-red-500 text-white px-2 py-1 rounded-md text-sm font-semibold hover:bg-red-600 transition-colors duration-200">Забыл</button>
                         <button @click="rateCard('remember')" class="flex-1 bg-yellow-500 text-white px-2 py-1 rounded-md text-sm font-semibold hover:bg-yellow-600 transition-colors duration-200">Припоминаю</button>
                         <button @click="rateCard('know')" class="flex-1 bg-green-500 text-white px-2 py-1 rounded-md text-sm font-semibold hover:bg-green-600 transition-colors duration-200">Знаю</button>
                     </div>
-                    <div v-else class="flex justify-center mt-4 md:mt-6 space-x-2 md:space-x-4">
+                    <div v-else class="flex justify-center mt-2 md:mt-6 space-x-2 md:space-x-4">
                         <button @click="getNextCard" class="bg-blue-500 text-white px-3 py-1 rounded-md text-sm font-semibold hover:bg-blue-600 transition-colors duration-200">Следующая карточка</button>
                     </div>
                 </div>
             </div>
-            <div v-else class="text-center text-gray-600 text-base md:text-xl py-4 md:py-10">
+            <div v-else class="text-center text-gray-600 text-base md:text-xl py-2 md:py-10">
                 <p>Нет активной колоды или она пуста. Пожалуйста, загрузите колоду на вкладке "Загрузка колоды".</p>
             </div>
         </div>
 
-        <div v-if="currentView === 'manage'" class="bg-white p-2 md:p-8 rounded-lg shadow-md">
-            <h2 class="text-xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-800">Управление колодами</h2>
+        <div v-if="currentView === 'manage'" class="bg-white p-1 md:p-8 rounded-lg shadow-md">
+            <h2 class="text-xl md:text-3xl font-bold mb-2 md:mb-6 text-gray-800">Управление колодами</h2>
             <div v-if="decks.length > 0">
-                <ul class="space-y-2 md:space-y-4">
-                    <li v-for="deck in decks" :key="deck.id" class="flex flex-col md:flex-row items-start md:items-center justify-between p-2 md:p-5 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
-                        <div class="flex-grow mb-2 md:mb-0">
+                <ul class="space-y-1 md:space-y-4">
+                    <li v-for="deck in decks" :key="deck.id" class="flex flex-col md:flex-row items-start md:items-center justify-between p-1 md:p-5 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
+                        <div class="flex-grow mb-1 md:mb-0">
                             <span class="font-semibold text-lg md:text-xl text-gray-900">{{ deck.name }}</span>
                             <p class="text-sm text-gray-500 mt-1">Создана: {{ new Date(deck.createdAt).toLocaleString() }}</p>
                             <p class="text-sm text-gray-500">Карточек: {{ deck.cards.length }}</p>
@@ -112,18 +111,18 @@ console.log('Hello, world!');
                     </li>
                 </ul>
             </div>
-            <div v-else class="text-center text-gray-600 text-base md:text-xl py-4 md:py-10">
+            <div v-else class="text-center text-gray-600 text-base md:text-xl py-2 md:py-10">
                 У вас пока нет сохраненных колод.
             </div>
 
             <div v-if="isRenaming" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 md:p-4">
-                <div class="bg-white p-2 md:p-8 rounded-lg shadow-xl w-full max-w-md">
-                    <h3 class="text-lg md:text-2xl font-bold mb-3 md:mb-5 text-gray-800">Переименовать колоду</h3>
+                <div class="bg-white p-1 md:p-8 rounded-lg shadow-xl w-full max-w-md">
+                    <h3 class="text-lg md:text-2xl font-bold mb-2 md:mb-5 text-gray-800">Переименовать колоду</h3>
                     <input
                         type="text"
                         v-model="newDeckName"
                         @keyup.enter="renameDeck"
-                        class="w-full p-2 md:p-3 border border-gray-300 rounded-lg mb-2 md:mb-5 text-sm md:text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        class="w-full p-1 md:p-3 border border-gray-300 rounded-lg mb-2 md:mb-5 text-sm md:text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                         placeholder="Введите новое название"
                     >
                     <div class="flex justify-end space-x-3">
