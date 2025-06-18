@@ -19,6 +19,15 @@
             overflow-x: auto; /* Allow horizontal scrolling for long lines */
             background-color: #282c34; /* Matching atom-one-dark theme background */
         }
+        @media (max-width: 639px) {
+            body {
+                font-size: 0.875rem; /* text-sm */
+            }
+            pre {
+                font-size: 0.75rem;
+                padding: 0.5em;
+            }
+        }
         code {
             font-family: 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
             white-space: pre-wrap; /* Ensure long lines wrap */
@@ -26,12 +35,12 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-100 text-gray-800 text-sm sm:text-base">
     <div id="app" class="container mx-auto p-2 sm:p-4">
         <h1 class="text-2xl sm:text-4xl font-extrabold text-center my-4 sm:my-8 text-gray-900">Флеш-карты для обучения</h1>
 
-        <div class="mb-8">
-            <nav class="flex justify-center space-x-2 sm:space-x-4 mb-4">
+        <div class="mb-4 sm:mb-8">
+            <nav class="flex justify-center space-x-1 sm:space-x-4 mb-2 sm:mb-4">
                 <button @click="currentView = 'load'" :class="{'bg-green-500 text-white': currentView === 'load', 'bg-blue-500 text-white': currentView !== 'load'}" class="px-2 py-1 rounded-md text-sm font-semibold hover:opacity-90 transition-opacity duration-200">Загрузка колоды</button>
                 <button @click="currentView = 'learn'" :class="{'bg-green-500 text-white': currentView === 'learn', 'bg-blue-500 text-white': currentView !== 'learn'}" class="px-2 py-1 rounded-md text-sm font-semibold hover:opacity-90 transition-opacity duration-200">Изучение</button>
                 <button @click="currentView = 'manage'" :class="{'bg-green-500 text-white': currentView === 'manage', 'bg-blue-500 text-white': currentView !== 'manage'}" class="px-2 py-1 rounded-md text-sm font-semibold hover:opacity-90 transition-opacity duration-200">Управление колодами</button>
@@ -80,7 +89,7 @@ console.log('Hello, world!');
                         <p class="text-sm text-gray-600">Вес карточки: {{ currentCard.weight.toFixed(2) }} | Показов: {{ currentCard.attempts }}</p>
                     </div>
                 </div>
-                <div v-else class="text-center text-gray-600 text-lg sm:text-xl py-6 sm:py-10">
+                <div v-else class="text-center text-gray-600 text-lg sm:text-xl py-4 sm:py-10">
                     Все карточки в этой колоде изучены или удалены. Выберите другую или загрузите новую.
                 </div>
 
@@ -95,7 +104,7 @@ console.log('Hello, world!');
                     </div>
                 </div>
             </div>
-            <div v-else class="text-center text-gray-600 text-lg sm:text-xl py-6 sm:py-10">
+            <div v-else class="text-center text-gray-600 text-lg sm:text-xl py-4 sm:py-10">
                 <p>Нет активной колоды или она пуста. Пожалуйста, загрузите колоду на вкладке "Загрузка колоды".</p>
             </div>
         </div>
@@ -103,9 +112,9 @@ console.log('Hello, world!');
         <div v-if="currentView === 'manage'" class="bg-white p-4 sm:p-8 rounded-lg shadow-md">
             <h2 class="text-xl sm:text-3xl font-bold mb-4 sm:mb-6 text-gray-800">Управление колодами</h2>
             <div v-if="decks.length > 0">
-                <ul class="space-y-4">
+                <ul class="space-y-2 sm:space-y-4">
                     <li v-for="deck in decks" :key="deck.id" class="flex flex-col md:flex-row items-start md:items-center justify-between p-3 sm:p-5 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
-                        <div class="flex-grow mb-3 md:mb-0">
+                        <div class="flex-grow mb-2 md:mb-0">
                             <span class="font-semibold text-lg sm:text-xl text-gray-900">{{ deck.name }}</span>
                             <p class="text-sm text-gray-500 mt-1">Создана: {{ new Date(deck.createdAt).toLocaleString() }}</p>
                             <p class="text-sm text-gray-500">Карточек: {{ deck.cards.length }}</p>
@@ -119,7 +128,7 @@ console.log('Hello, world!');
                     </li>
                 </ul>
             </div>
-            <div v-else class="text-center text-gray-600 text-lg sm:text-xl py-6 sm:py-10">
+            <div v-else class="text-center text-gray-600 text-lg sm:text-xl py-4 sm:py-10">
                 У вас пока нет сохраненных колод.
             </div>
 
@@ -130,7 +139,7 @@ console.log('Hello, world!');
                         type="text"
                         v-model="newDeckName"
                         @keyup.enter="renameDeck"
-                        class="w-full p-2 sm:p-3 border border-gray-300 rounded-lg mb-3 sm:mb-5 text-sm sm:text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        class="w-full p-2 sm:p-3 border border-gray-300 rounded-lg mb-2 sm:mb-5 text-sm sm:text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                         placeholder="Введите новое название"
                     >
                     <div class="flex justify-end space-x-3">
