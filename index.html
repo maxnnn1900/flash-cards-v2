@@ -67,8 +67,10 @@ console.log('Hello, world!');
                     </button>
                     <p class="text-lg md:text-2xl font-semibold mb-1 md:mb-2 lg:mb-4 text-gray-900">Q: {{ currentCard.question }}</p>
                     <div v-if="showAnswer" class="mt-4 border-t border-gray-200 pt-4">
-                        <p class="text-sm md:text-base lg:text-xl font-semibold mb-1 md:mb-2 text-gray-800">A:</p>
-                        <div v-html="highlightedAnswer" class="prose max-w-none mb-4"></div>
+                        <div class="flex items-start text-lg md:text-2xl font-semibold mb-1 md:mb-2 text-gray-800">
+                            <span class="mr-1">A:</span>
+                            <div v-html="highlightedAnswer" class="prose max-w-none flex-1"></div>
+                        </div>
                         <p class="text-sm text-gray-600">Вес карточки: {{ currentCard.weight.toFixed(2) }} | Показов: {{ currentCard.attempts }}</p>
                     </div>
                 </div>
